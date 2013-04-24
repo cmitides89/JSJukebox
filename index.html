@@ -9,16 +9,18 @@
 
   <body>
 
+
     <h1>My Amazing SoundCloud Catalog</h1>
 
     <input type="text" id="search" onchange="doSearch()" />
 
     <div id="catalog">
+
     </div>
 
     <script>
       SC.initialize({
-        client_id: 'd4c9ff1b3aaa3e397abbf4aa470e736e'
+        client_id: '8ed8ddb2b420a0d552bcc857b96bda9f'
       });
 
       function doSearch() {
@@ -27,7 +29,16 @@
         // Search soundcloud for artists
         SC.get('/tracks', { q: searchTerm, license: 'cc-by-sa' }, function(tracks) {
           for(track in tracks) {
-            console.log(tracks[track]);
+            var Img = document.createElement('Img');
+            Img.setAttribute("src",(tracks[track]["artwork_url"]));
+            // console.log(tracks[track]["artwork_url"]);
+            var Catalog = document.getElementById('catalog');
+            if((tracks[track]["artwork_url"])){
+            Catalog.appendChild(Img);
+          }
+
+
+
           }
         });
       };
