@@ -1,48 +1,62 @@
 <!DOCTYPE html >
 <html>
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <title>My Amazing SoundCloud Catalog</title>
-    <script src="http://connect.soundcloud.com/sdk.js"></script>
-  </head>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <title>My Amazing SoundCloud Catalog</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="http://connect.soundcloud.com/sdk.js"></script>
+</head>
 
-  <body>
+<body>
 
 
-    <h1>My Amazing SoundCloud Catalog</h1>
+  <h1>My Amazing SoundCloud Catalog</h1>
 
-    <input type="text" id="search" onchange="doSearch()" />
+  <input type="text" id="search" onchange="doSearch()" />
 
-    <div id="catalog">
+  <div id="catalog">
+    <div class="music"></div>
+    <div id="overlay"></div>
 
-    </div>
 
-    <script>
-      SC.initialize({
-        client_id: '8ed8ddb2b420a0d552bcc857b96bda9f'
-      });
+  </div>
 
-      function doSearch() {
-        var searchTerm = document.getElementById('search').value;
+  <script>
+  SC.initialize({
+    client_id: '8ed8ddb2b420a0d552bcc857b96bda9f'
+  });
+
+  function doSearch() {
+    var searchTerm = document.getElementById('search').value;
 
         // Search soundcloud for artists
         SC.get('/tracks', { q: searchTerm, license: 'cc-by-sa' }, function(tracks) {
           for(track in tracks) {
-            var Img = document.createElement('Img');
-            Img.setAttribute("src",(tracks[track]["artwork_url"]));
-            // console.log(tracks[track]["artwork_url"]);
-            var Catalog = document.getElementById('catalog');
+            var img = document.createElement('img');
+            var catalog = document.getElementById('catalog');
+            var div = document.createElement('div');
+            
+            
+            img.setAttribute("src",(tracks[track]["artwork_url"]));
+            div.setAttribute("class","music");
+            
             if((tracks[track]["artwork_url"])){
-            Catalog.appendChild(Img);
+              catalog.appendChild(div);
+              div.appendChild(img);
+            }
+            function overlay(){
+              el = document.getElementById("overlay");
+              el.style.visibility = (el.style.visibility == "visible")?"hidden":"visible";
+              overlay.setAttribute((tracks[track]["title","genre","description"]));
+
+
+
+            }
           }
-
-
-
-          }
-        });
+      });
       };
-    </script>
-  </body>
+      </script>
+    </body>
 
-</html>
+    </html>
